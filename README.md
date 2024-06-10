@@ -86,6 +86,7 @@ Donde a su vez podemos ver los LUTs utilizados:
 Para personalizar esta comunicacion I2C decidimos cambiar la trama de 8 bits a 16 bits, y tambien poner un clock de 50Mhz para el scl, para lo cual realizamos los siguientes cambios:
 
 **Cambio de trama**
+
 Para realziar el cambio de trama cambiamos la cantidad de bits ajustando tx_reg, tx_next, rx_reg, rx_next, a los 16 bits que queremos:
 
 ```
@@ -115,4 +116,5 @@ Cambiar los limites del contador de bits:
 ```
 
 **Cambio frecuencia de reloj a 50Mhz para scl**
+
 Cambiamos el cálculo de los valores de qutr y half:
