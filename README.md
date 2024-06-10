@@ -148,3 +148,6 @@ Ajusta la lógica de los estados que dependen de qutr y half:
         endcase
 ```
 >puede verse mas a detalle todo este codigo modificado en [hardware personalizado](Añadido/Salo_edgar_ale_I2C.sv) donde ya posee todos los cambios necesarios para cambiar la trama a 16 bits y que el scl tenga un clk de 50Mhz 
+
+## Video de Youtube
+Video de demostracion [I2C](https://youtu.be/t0ho8PBJZ7E)
