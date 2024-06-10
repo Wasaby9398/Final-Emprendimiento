@@ -118,3 +118,33 @@ Cambiar los limites del contador de bits:
 **Cambio frecuencia de reloj a 50Mhz para scl**
 
 Cambiamos el cálculo de los valores de qutr y half:
+
+```
+86  assign qutr = dvsr;
+87      assign half = {qutr[14:0], 1'b0}; // half = 2' qutr 
+```
+Ajusta la lógica de los estados que dependen de qutr y half:
+
+```
+                if (c_reg == qutr) begin
+                    c_next = 0;
+                    state_next = hold;
+```
+```
+                if (c_reg == half) begin
+                    c_next      = 0;
+                    state_next  = start1;
+                end
+            stop1: begin // stop condition
+                sda_out = 1'b0;
+                if (c_reg == half) begin
+                    c_next = 0;
+                    state_next = stop2;
+                end // end if
+            end
+            default: // stop2 (for turnaround time)
+                if (c_reg == half)
+                    state_next = idle;
+        endcase
+```
+>puede verse mas a detalle todo este codigo modificado en [hardware personalizado](Añadido/Salo_edgar_ale_I2C.sv) donde ya posee todos los cambios necesarios para cambiar la trama a 16 bits y que el scl tenga un clk de 50Mhz 
