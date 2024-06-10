@@ -88,7 +88,7 @@ Para personalizar esta comunicacion I2C decidimos cambiar la trama de 8 bits a 1
 **Cambio de trama**
 Para realziar el cambio de trama cambiamos la cantidad de bits ajustando tx_reg, tx_next, rx_reg, rx_next, a los 16 bits que queremos:
 
-'''
+```
     logic [16:0]  tx_reg, tx_next;
-    logic [16:0]  rx_reg, rx_next; 
-'''
+    logic [16:0]  rx_reg, rx_next;
+```
