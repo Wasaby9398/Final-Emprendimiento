@@ -92,3 +92,27 @@ Para realziar el cambio de trama cambiamos la cantidad de bits ajustando tx_reg,
     logic [16:0]  tx_reg, tx_next;
     logic [16:0]  rx_reg, rx_next;
 ```
+Así como tambien ajustar todas las partes donde se procesan estos bits:
+```
+61   assign dout = rx_reg[8:1];
+141  tx_next    = {din, nack};   //nack used as NACK in read
+147  sda_out    = tx_reg[16]
+156  sda_out    = tx_reg[16]
+161  rx_next = {tx_reg[15:0], sda};   //shift data in
+165  sda_out    = tx_reg[16]
+```
+Cambiar los limites del contador de bits:
+```
+178 if (bit_reg==8) begin    // done with 8 data bits + 1 ack
+179                        state_next  = data_end; // hold;
+180                        done_tick_i = 1'b1;
+181                    end
+182                    else begin
+183                        tx_next  = {tx_reg[7:0], 1'b0};
+184                        bit_next = bit_reg + 1;
+185                        state_next = data1;
+186                     end    // end else
+```
+
+**Cambio frecuencia de reloj a 50Mhz para scl**
+Cambiamos el cálculo de los valores de qutr y half:
