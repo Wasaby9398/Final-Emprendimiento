@@ -3,7 +3,6 @@ module top_module (
     input  wire reset,
     output tri  scl,
     inout  tri  sda,
-    output reg  tx,
     output logic  led4,
     output logic  led2
 );
@@ -15,7 +14,7 @@ module top_module (
     logic [31:0] sensor_data;
 
     // Instancia del I2C core
-    chu_i2c_core i2c_core_inst (
+   i2c_core i2c_core_inst (
         .clk(clk),
         .reset(reset),
         .cs(cs),
@@ -27,14 +26,6 @@ module top_module (
         .scl(scl),
         .sda(sda)
     );
-
-    // Instancia del UART
-//    uart_tx uart_tx_inst (
-//        .clk(clk),
-//        .reset(reset),
-//        .sensor_data(sensor_data),
-//        .tx(tx)
-//    );
 
     // Dirección del dispositivo I2C (LM75)
     localparam [6:0] LM75_ADDR = 7'b1001000; // Dirección I2C del LM75
